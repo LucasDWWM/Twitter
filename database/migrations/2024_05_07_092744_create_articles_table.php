@@ -16,7 +16,6 @@ class CreateArticlesTable extends Migration
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-            // Ajoutez d'autres colonnes pour les informations sur l'article ici
         });
     }
 

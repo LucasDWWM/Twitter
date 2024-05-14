@@ -14,7 +14,6 @@ class CreateAccountsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('created_at')->useCurrent();
-            // Ajoutez d'autres colonnes pour les informations utilisateur pertinentes ici
         });
     }
 
