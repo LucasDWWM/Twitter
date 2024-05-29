@@ -10,34 +10,49 @@ class CategoryController extends Controller
     // Afficher toutes les catégories
     public function index()
     {
-        return Category::all();
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
     }
 
     // Créer une nouvelle catégorie
+    public function create()
+    {
+        return view('categories.create');
+    }
+
+    // Enregistrer une nouvelle catégorie
     public function store(Request $request)
     {
         $category = Category::create($request->all());
-        return response()->json($category, 201);
+        return redirect()->route('categories.index');
     }
 
     // Afficher une catégorie spécifique
     public function show($id)
     {
-        return Category::findOrFail($id);
+        $category = Category::findOrFail($id);
+        return view('categories.show', compact('category'));
     }
 
-    // Mettre à jour une catégorie existante
+    // Éditer une catégorie
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    // Mettre à jour une catégorie
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
         $category->update($request->all());
-        return response()->json($category, 200);
+        return redirect()->route('categories.index');
     }
 
     // Supprimer une catégorie
     public function destroy($id)
     {
         Category::destroy($id);
-        return response()->json(null, 204);
+        return redirect()->route('categories.index');
     }
 }

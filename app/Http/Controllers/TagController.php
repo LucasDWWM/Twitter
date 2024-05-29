@@ -10,34 +10,49 @@ class TagController extends Controller
     // Afficher tous les tags
     public function index()
     {
-        return Tag::all();
+        $tags = Tag::all();
+        return view('tags.index', compact('tags'));
     }
 
-    // Créer un nouveau tag
+    // Afficher le formulaire de création de tag
+    public function create()
+    {
+        return view('tags.create');
+    }
+
+    // Enregistrer un nouveau tag
     public function store(Request $request)
     {
         $tag = Tag::create($request->all());
-        return response()->json($tag, 201);
+        return redirect()->route('tags.index');
     }
 
     // Afficher un tag spécifique
     public function show($id)
     {
-        return Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
+        return view('tags.show', compact('tag'));
     }
 
-    // Mettre à jour un tag existant
+    // Afficher le formulaire d'édition d'un tag
+    public function edit($id)
+    {
+        $tag = Tag::findOrFail($id);
+        return view('tags.edit', compact('tag'));
+    }
+
+    // Mettre à jour un tag
     public function update(Request $request, $id)
     {
         $tag = Tag::findOrFail($id);
         $tag->update($request->all());
-        return response()->json($tag, 200);
+        return redirect()->route('tags.index');
     }
 
     // Supprimer un tag
     public function destroy($id)
     {
         Tag::destroy($id);
-        return response()->json(null, 204);
+        return redirect()->route('tags.index');
     }
 }
