@@ -11,6 +11,11 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
+
+        if (request()->expectsJson()) {
+            return response()->json($tags);
+        }
+
         return view('tags.index', compact('tags'));
     }
 
@@ -24,6 +29,11 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $tag = Tag::create($request->all());
+
+        if (request()->expectsJson()) {
+            return response()->json($tag, 201);
+        }
+
         return redirect()->route('tags.index');
     }
 
@@ -31,6 +41,11 @@ class TagController extends Controller
     public function show($id)
     {
         $tag = Tag::findOrFail($id);
+
+        if (request()->expectsJson()) {
+            return response()->json($tag);
+        }
+
         return view('tags.show', compact('tag'));
     }
 
@@ -46,6 +61,11 @@ class TagController extends Controller
     {
         $tag = Tag::findOrFail($id);
         $tag->update($request->all());
+
+        if (request()->expectsJson()) {
+            return response()->json($tag, 200);
+        }
+
         return redirect()->route('tags.index');
     }
 
@@ -53,6 +73,11 @@ class TagController extends Controller
     public function destroy($id)
     {
         Tag::destroy($id);
+
+        if (request()->expectsJson()) {
+            return response()->json(null, 204);
+        }
+
         return redirect()->route('tags.index');
     }
 }
