@@ -12,3 +12,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('tags', TagController::class);
 });
+
+
