@@ -5,10 +5,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json(['message' => 'Welcome to the API'], 200);
-});
-
 
 // Groupement des routes avec middleware d'authentification
 Route::middleware('auth:sanctum')->group(function () {
