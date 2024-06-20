@@ -7,52 +7,53 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // Afficher toutes les catégories
+    // Afficher tous les categoriess
     public function index()
     {
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 
-    // Créer une nouvelle catégorie
+    // Afficher le formulaire de création d'categories
     public function create()
     {
         return view('categories.create');
     }
 
-    // Enregistrer une nouvelle catégorie
+    // Enregistrer un nouvel categories
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
+        $categories = Category::create($request->all());
         return redirect()->route('categories.index');
     }
 
-    // Afficher une catégorie spécifique
+    // Afficher un categories spécifique
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.show', compact('category'));
+        $categories = Category::findOrFail($id);
+        return view('categories.show', compact('categories'));
     }
 
-    // Éditer une catégorie
+    // Afficher le formulaire d'édition d'un categories
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.edit', compact('category'));
+        $categories = Category::findOrFail($id);
+        return view('categories.edit', compact('categories'));
     }
 
-    // Mettre à jour une catégorie
+    // Mettre à jour un categories
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
-        $category->update($request->all());
+        $categories = Category::findOrFail($id);
+        $categories->update($request->all());
         return redirect()->route('categories.index');
     }
 
-    // Supprimer une catégorie
+    // Supprimer un categories
     public function destroy($id)
     {
         Category::destroy($id);
         return redirect()->route('categories.index');
     }
 }
+

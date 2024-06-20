@@ -26,9 +26,8 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Route pour créer une nouvelle catégorie
-Route::get('/categories/create', function () {
-    return view('categories.create');
-});
+Route::resource('categories', CategoryController::class);
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 
 // Route pour éditer une catégorie
